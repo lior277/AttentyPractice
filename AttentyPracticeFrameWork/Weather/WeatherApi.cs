@@ -38,9 +38,9 @@ namespace AttentyPracticeFrameWork.Weather
             var response = client.GetAsync(apiRoute);
             var json = response.Result.Content.ReadAsStringAsync().Result;
 
-            var Obj = JsonConvert.DeserializeObject<GetWeatherResponse>(json);
+            var Obj = JsonConvert.DeserializeObject<TResponseDto>(json);
 
-            return (TResponseDto)Convert.ChangeType(Obj, typeof(TResponseDto));
+            return Obj;
         }
     }
 }
