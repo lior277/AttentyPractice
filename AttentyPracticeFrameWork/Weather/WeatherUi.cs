@@ -1,12 +1,13 @@
 ﻿using System;
+using AttentyPractice.Internals;
 using AttentyPracticeFrameWork.WebDriverActions;
 using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Weather
 {
-    public class WeatherUi : IWeatherUi
+    public class WeatherUi : ApiFactory, IWeatherUi
     {
-        private IWebDriver driver;
+        public IWebDriver driver { get; set; }
 
         #region Locators
         private readonly By SearcTextBoxExp = By.XPath("//input[@aria-label='Location Search']");

@@ -1,12 +1,14 @@
-﻿using AttentyPracticeFrameWork.WebDriverActions;
+﻿using AttentyPractice.Internals;
+using AttentyPractice.Internals.WebDriverImplemention;
+using AttentyPracticeFrameWork.WebDriverActions;
 using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public class OuncesToGrams : IOuncesToGrams
+    public class OuncesToGrams : ApiFactory, IOuncesToGrams
     {
-        private IWebDriver driver;
-
+        public IWebDriver driver { get; set; }
+    
         #region Locators
         private readonly By WeightExp = By.CssSelector("[class='typeConv weight bluebg']");
         private readonly By OuncesExp = By.XPath("//a[contains(.,'Ounces')]");
@@ -39,10 +41,10 @@ namespace AttentyPracticeFrameWork.Converters
         }
 
         public IOuncesToGrams InitiateWebDriver(IWebDriver driver)
-        {           
-                this.driver = driver;
-                driver.Manage().Window.Maximize();
-                return this;
+        {
+            this.driver = driver;
+            driver.Manage().Window.Maximize();
+            return this;
         }
 
         public IOuncesToGrams NvigateToConvectorSite(string url)
@@ -55,6 +57,6 @@ namespace AttentyPracticeFrameWork.Converters
         {
             driver.GetElement(ArgumentConvExp).SendKeys(num.ToString());
             return this;
-        }
+        }  
     }
 }

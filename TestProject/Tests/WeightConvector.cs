@@ -1,36 +1,31 @@
-using AttentyPracticeFrameWork.ContainerInitiate;
-using AttentyPracticeFrameWork.Converters;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static AttentyPracticeFrameWork.Extension.StringExtension;
 using AttentyPracticeFrameWork.ConversionRaitesexpected;
+using AttentyPracticeFrameWork.Converters;
+using AttentyPracticeFrameWork.Extension;
+using NUnit.Framework;
+using OpenQA.Selenium.Chrome;
 using System;
 
 namespace Tests
 {
-    [TestClass]
+    [TestFixture]
     public class WeightConvector : TestSuitBase
     {
         decimal numberToConvert = 15.2m;
         private IOuncesToGrams weight;
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            using (var container = ContainerInitialized.ContainerConfigure())
-            {
-                weight = container.GetInstance<IOuncesToGrams>();
-            }
-        }
-        [TestMethod]
+
+        [Test]
         public void CelsiusToFahrenheit()
         {
-           var result = weight.InitiateWebDriver(WebDriver)
-                .NvigateToConvectorSite(convectorSiteUrl)
-                .ClickOnWeightConvector()
-                .ClickOnOunces()
-                .ClickOnOuncesToGrams()
-                .TypeToOuncesTextBox(numberToConvert)
-                .GetConvertionValue();
+            var driver = new ChromeDriver();
+
+            var result = weight.InitiateWebDriver(driver)
+                 .NvigateToConvectorSite(convectorSiteUrl)
+                 .ClickOnWeightConvector()
+                 .ClickOnOunces()
+                 .ClickOnOuncesToGrams()
+                 .TypeToOuncesTextBox(numberToConvert)
+                 .GetConvertionValue();
 
             var actual = result.GetResaultNum();
             var num = ConversionRaitasCalcluation.OunceToGram(numberToConvert);
@@ -38,10 +33,10 @@ namespace Tests
             Assert.IsTrue(expected < 1);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TestCleanupAttribute()
         {
-            Dispose();
+            //Dispose();
         }
     }
 }

@@ -1,13 +1,12 @@
-﻿using AttentyPracticeFrameWork.WebDriverActions;
+﻿using AttentyPractice.Internals;
+using AttentyPracticeFrameWork.WebDriverActions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public class MetersToFeet : IMetersToFeet
+    public class MetersToFeet : ApiFactory, IMetersToFeet
     {
-       private IWebDriver driver;
+        public IWebDriver driver { get; set; }      
 
         #region Locators
         private readonly By LengthExp = By.CssSelector("[class='typeConv length bluebg']");
@@ -18,20 +17,7 @@ namespace AttentyPracticeFrameWork.Converters
         private readonly By ResultExp = By.CssSelector("#answer");
         #endregion
 
-        public IMetersToFeet InitiateWebDriver(IWebDriver driver)
-        {
-            this.driver = driver;
-            driver.Manage().Window.Maximize();
-            return this;
-        }
-
-        // Celsius to Fahrenheit pipe
-
-        public IMetersToFeet NvigateToConvectorSite(string url)
-        {
-            driver.Navigate().GoToUrl(url);
-            return this;
-        }
+        // Celsius to Fahrenheit pipe       
         public IMetersToFeet ClickOnLengthConvector()
         {
             driver.GetElement(LengthExp).Click();
@@ -59,7 +45,7 @@ namespace AttentyPracticeFrameWork.Converters
         public IMetersToFeet ChangeFormatToDecimal()
         {
             var element = driver.GetElement(FormatExp);
-            element.SendKeys("Decimal"+Keys.Enter);
+            element.SendKeys("Decimal" + Keys.Enter);
 
             return this;
         }
@@ -67,8 +53,6 @@ namespace AttentyPracticeFrameWork.Converters
         public string GetConvertionValue()
         {
             return driver.GetElement(ResultExp).Text;
-        }
-
-        
+        }      
     }
 }

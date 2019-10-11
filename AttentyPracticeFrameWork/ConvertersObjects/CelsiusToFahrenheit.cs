@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AttentyPractice.Internals;
 using AttentyPracticeFrameWork.WebDriverActions;
 using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public class CelsiusToFahrenheit : ICelsiusToFahrenheit
+    public class CelsiusToFahrenheit : ApiFactory, ICelsiusToFahrenheit
     {
-        private IWebDriver driver;
+        public IWebDriver driver { get; set; }
 
         #region Locators
         private readonly By TemperatureExp = By.CssSelector("[class='typeConv temperature bluebg']");
@@ -19,15 +15,8 @@ namespace AttentyPracticeFrameWork.Converters
         private readonly By FormatExp = By.XPath("//select[@id='format']");
         private readonly By ArgumentConvExp = By.CssSelector("#argumentConv");
         private readonly By ResultExp = By.CssSelector("#answer");
-        #endregion
 
-        public ICelsiusToFahrenheit InitiateWebDriver(IWebDriver driver)
-        {
-            this.driver = driver;
-            driver.Manage().Window.Maximize();
-            return this;
-        }
-      
+        #endregion
         public ICelsiusToFahrenheit ClickOnCelsius()
         {
             driver.GetElement(CelsiusExp).Click();
@@ -50,13 +39,7 @@ namespace AttentyPracticeFrameWork.Converters
         {
             return driver.GetElement(ResultExp).Text;
         }
-    
-        public ICelsiusToFahrenheit NvigateToConvectorSite(string url)
-        {
-            driver.Navigate().GoToUrl(url);
-            return this;
-        }
-
+        
         public ICelsiusToFahrenheit TypeToCelsiusTextBox(decimal num)
         {
             driver.GetElement(ArgumentConvExp).SendKeys(num.ToString());
@@ -69,6 +52,6 @@ namespace AttentyPracticeFrameWork.Converters
             element.SendKeys("Decimal" + Keys.Enter);
 
             return this;
-        }
+        }      
     }
 }

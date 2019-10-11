@@ -1,13 +1,9 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AttentyPractice.Internals;
+using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-   public interface IOuncesToGrams
+    public interface IOuncesToGrams : IApiFactory
     {
         IOuncesToGrams InitiateWebDriver(IWebDriver driver);
         IOuncesToGrams NvigateToConvectorSite(string url);

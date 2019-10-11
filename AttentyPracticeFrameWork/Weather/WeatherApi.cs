@@ -3,6 +3,7 @@ using AttentyPracticeFrameWork.Dto_s;
 using AttentyPracticeFrameWork.Weather;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -14,6 +15,7 @@ namespace AttentyPracticeFrameWork.Weather
 {
     public class WeatherApi : IWeatherApi
     {
+        public IWebDriver driver { get; set; }
         static HttpClient client = new HttpClient();
 
         public WeatherApi()

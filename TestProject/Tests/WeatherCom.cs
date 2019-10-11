@@ -1,33 +1,25 @@
-﻿using AttentyPracticeFrameWork.ContainerInitiate;
+﻿using AttentyPracticeFrameWork.Extension;
 using AttentyPracticeFrameWork.Weather;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static AttentyPracticeFrameWork.Extension.StringExtension;
+using NUnit.Framework;
+using OpenQA.Selenium.Chrome;
 using System;
 
 namespace Tests.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class WeatherCom : TestSuitBase
     {
         private IWeatherUi weatherUi;
         private IWeatherApi WeatherApi;
         private string location = "20852";
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            using (var container = ContainerInitialized.ContainerConfigure())
-            {
-                weatherUi = container.GetInstance<IWeatherUi>();
-                WeatherApi = container.GetInstance<IWeatherApi>();
-            }
-        }
-
-        [TestMethod]
+    
+        [Test]
         public void GetTemperature()
-        {          
+        {
+            var driver = new ChromeDriver();
+
             var temperatureUI = weatherUi
-                .InitiateWebDriver(WebDriver)
+                .InitiateWebDriver(driver)
                 .NavigateToTemperatureSite(weatherSiteUrl)
                 .SearchLocation(location)
                 .ChooseLocation()
@@ -39,10 +31,10 @@ namespace Tests.Tests
             Assert.IsTrue(Math.Abs(actual - temperature) <= 0.1);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TestCleanupAttribute()
         {
-            Dispose();
+            //Dispose();
         }
 
     }

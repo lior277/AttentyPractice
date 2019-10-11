@@ -1,32 +1,25 @@
-using AttentyPracticeFrameWork.ContainerInitiate;
 using AttentyPracticeFrameWork.Converters;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static AttentyPracticeFrameWork.Extension.StringExtension;
 using AttentyPracticeFrameWork.ConversionRaitesexpected;
 using System;
+using AttentyPractice.Internals;
+using NUnit.Framework;
+using OpenQA.Selenium.Chrome;
 
 namespace Tests
 {
-    [TestClass]
+    [TestFixture]
     public class MeterConvector : TestSuitBase
     {
         decimal numberToConvert = 15.2m;
-        private IMetersToFeet Length;
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            using (var container = ContainerInitialized.ContainerConfigure())
-            {
-                Length = container.GetInstance<IMetersToFeet>();
-            }
-        }
-
-        [TestMethod]
+        [Test]
         public void MeterToFeet()
         {
-            var result = Length.InitiateWebDriver(WebDriver)
-                 .NvigateToConvectorSite(convectorSiteUrl)
+            var driver = new ChromeDriver();
+
+            var result = new ApiFactory(driver)
+                 .ChangeContext<IMetersToFeet>()
                  .ClickOnLengthConvector()
                  .ClickOnMeters()
                  .ClickOnMetersToFeet()
@@ -40,10 +33,10 @@ namespace Tests
             Assert.IsTrue(expected < 1);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TestCleanupAttribute()
         {
-            Dispose();
+            //Dispose();
         }
 
     }

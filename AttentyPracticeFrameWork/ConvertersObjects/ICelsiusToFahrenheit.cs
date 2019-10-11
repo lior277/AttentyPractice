@@ -1,11 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using AttentyPractice.Internals;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public interface ICelsiusToFahrenheit
+    public interface ICelsiusToFahrenheit : IApiFactory
     {
-        ICelsiusToFahrenheit InitiateWebDriver(IWebDriver driver);
-        ICelsiusToFahrenheit NvigateToConvectorSite(string url);
         ICelsiusToFahrenheit ClickOnTemperatureConvector();
         ICelsiusToFahrenheit ClickOnCelsius();
         ICelsiusToFahrenheit ClickOnCelsiusToFahrenheit();

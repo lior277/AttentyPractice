@@ -1,16 +1,9 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AttentyPractice.Internals;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-   public interface IMetersToFeet
+    public interface IMetersToFeet : IApiFactory
     {
-        IMetersToFeet InitiateWebDriver(IWebDriver driver);
-        IMetersToFeet NvigateToConvectorSite(string url);
         IMetersToFeet ClickOnLengthConvector();
         IMetersToFeet ClickOnMeters();
         IMetersToFeet ClickOnMetersToFeet();
