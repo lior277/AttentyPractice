@@ -4,9 +4,14 @@ using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public class CelsiusToFahrenheit : ApiFactory, ICelsiusToFahrenheit
+    public class CelsiusToFahrenheit : ApplicationFactory, ICelsiusToFahrenheit
     {
-        public IWebDriver driver { get; set; }
+        public IWebDriver Driver { get; set; }
+
+        public CelsiusToFahrenheit(IWebDriver driver) : base(driver)
+        {
+
+        }
 
         #region Locators
         private readonly By TemperatureExp = By.CssSelector("[class='typeConv temperature bluebg']");
@@ -19,36 +24,36 @@ namespace AttentyPracticeFrameWork.Converters
         #endregion
         public ICelsiusToFahrenheit ClickOnCelsius()
         {
-            driver.GetElement(CelsiusExp).Click();
+            Driver.GetElement(CelsiusExp).Click();
             return this;
         }
 
         public ICelsiusToFahrenheit ClickOnCelsiusToFahrenheit()
         {
-            driver.GetElement(CelsiusToFahrenheitExp).Click();
+            Driver.GetElement(CelsiusToFahrenheitExp).Click();
             return this;
         }
 
         public ICelsiusToFahrenheit ClickOnTemperatureConvector()
         {
-            driver.GetElement(TemperatureExp).Click();
+            Driver.GetElement(TemperatureExp).Click();
             return this;
         }
 
         public string GetConvertionValue()
         {
-            return driver.GetElement(ResultExp).Text;
+            return Driver.GetElement(ResultExp).Text;
         }
         
         public ICelsiusToFahrenheit TypeToCelsiusTextBox(decimal num)
         {
-            driver.GetElement(ArgumentConvExp).SendKeys(num.ToString());
+            Driver.GetElement(ArgumentConvExp).SendKeys(num.ToString());
             return this;
         }
 
         public ICelsiusToFahrenheit ChangeFormatToDecimal()
         {
-            var element = driver.FindElement(FormatExp);
+            var element = Driver.FindElement(FormatExp);
             element.SendKeys("Decimal" + Keys.Enter);
 
             return this;

@@ -2,7 +2,7 @@
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public interface IMetersToFeet : IApiFactory
+    public interface IMetersToFeet : IApplicationFactory
     {
         IMetersToFeet ClickOnLengthConvector();
         IMetersToFeet ClickOnMeters();

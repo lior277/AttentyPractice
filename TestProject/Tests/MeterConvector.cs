@@ -18,7 +18,7 @@ namespace Tests
         {
             var driver = new ChromeDriver();
 
-            var result = new ApiFactory(driver)
+            var result = new ApplicationFactory(driver)
                  .ChangeContext<IMetersToFeet>()
                  .ClickOnLengthConvector()
                  .ClickOnMeters()

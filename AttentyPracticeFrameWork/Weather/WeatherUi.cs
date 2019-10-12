@@ -1,13 +1,15 @@
 ﻿using System;
 using AttentyPractice.Internals;
+using AttentyPracticeFrameWork.Dto_s;
+using AttentyPracticeFrameWork.Extension;
 using AttentyPracticeFrameWork.WebDriverActions;
 using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Weather
 {
-    public class WeatherUi : ApiFactory, IWeatherUi
+    public class WeatherUi : ApplicationFactory, IWeatherUi
     {
-        public IWebDriver driver { get; set; }
+        public IWebDriver Driver { get; set; }
 
         #region Locators
         private readonly By SearcTextBoxExp = By.XPath("//input[@aria-label='Location Search']");
@@ -16,34 +18,29 @@ namespace AttentyPracticeFrameWork.Weather
 
         #endregion
 
-        public IWeatherUi InitiateWebDriver(IWebDriver driver)
-        {
-            this.driver = driver;
-            driver.Manage().Window.Maximize();
-            return this;
-        }
         public IWeatherUi NavigateToTemperatureSite(string url)
         {
-            driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(url);
             return this;
         }
         public IWeatherUi SearchLocation(string location)
         {
-            driver.WaitForElementToBeEnable(SearcTextBoxExp);
-            driver.GetElement(SearcTextBoxExp).Click();
-            driver.GetElement(SearcTextBoxExp).SendKeys(location);
+            Driver.WaitForElementToBeEnable(SearcTextBoxExp);
+            Driver.GetElement(SearcTextBoxExp).Click();
+            Driver.GetElement(SearcTextBoxExp).SendKeys(location);
             return this;
         }
         public IWeatherUi ChooseLocation()
         {
-            driver.GetElement(SearchResultsExp).Click();
+            Driver.GetElement(SearchResultsExp).Click();
             return this;
         }
-        public string GetTemperatureValue()
-        {
-           return driver.GetElement(TemperatureExp).Text;
-        }
 
-       
+        public int GetTodayTemperatureValue()
+        {
+            var text = Driver.GetElement(TemperatureExp).Text;
+            return Convert.ToInt32(text.GetTemperature());
+
+        }
     }
 }

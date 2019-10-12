@@ -1,7 +1,10 @@
-﻿using AttentyPracticeFrameWork.Converters;
+﻿using AttentyPractice.Internals.DAL;
+using AttentyPracticeFrameWork.ApiRoutes;
+using AttentyPracticeFrameWork.Converters;
 using AttentyPracticeFrameWork.Weather;
 using Autofac;
 using OpenQA.Selenium;
+using System.Net.Http;
 
 namespace AttentyPracticeFrameWork.ContainerInitiate
 {
@@ -11,11 +14,14 @@ namespace AttentyPracticeFrameWork.ContainerInitiate
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<MetersToFeet>().OnActivating(e => e.Instance.driver = driver).As<IMetersToFeet>();
-            builder.RegisterType<OuncesToGrams>().OnActivating(e => e.Instance.driver = driver).As<IOuncesToGrams>(); ;
-            builder.RegisterType<WeatherUi>().OnActivating(e => e.Instance.driver = driver).As<IWeatherUi>(); ;
-            builder.RegisterType<WeatherApi>().OnActivating(e => e.Instance.driver = driver).As<IWeatherApi>(); ;
-            builder.RegisterType<CelsiusToFahrenheit>().OnActivating(e => e.Instance.driver = driver).As<ICelsiusToFahrenheit>(); ;
+            builder.RegisterType<MetersToFeet>().OnActivating(e => e.Instance.Driver = driver).As<IMetersToFeet>();
+            builder.RegisterType<OuncesToGrams>().OnActivating(e => e.Instance.Driver = driver).As<IOuncesToGrams>();
+            builder.RegisterType<WeatherUi>().OnActivating(e => e.Instance.Driver = driver).As<IWeatherUi>();
+            builder.RegisterType<WeatherApi>().As<IWeatherApi>();
+            builder.RegisterType<ApiAccess>().As<IApiAccess>();
+            builder.RegisterType<ApiRouteAggregate>().As<IApiRouteAggregate>();
+            builder.RegisterType<CelsiusToFahrenheit>().OnActivating(e => e.Instance.Driver = driver).As<ICelsiusToFahrenheit>();
+            builder.RegisterType<HttpClient>().AsSelf().InstancePerLifetimeScope();
 
             var container = builder.Build();
 

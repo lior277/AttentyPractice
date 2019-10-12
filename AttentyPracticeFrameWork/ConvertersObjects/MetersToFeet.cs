@@ -4,9 +4,14 @@ using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public class MetersToFeet : ApiFactory, IMetersToFeet
+    public class MetersToFeet : ApplicationFactory, IMetersToFeet
     {
-        public IWebDriver driver { get; set; }      
+        public IWebDriver Driver { get; set; }
+
+        public MetersToFeet(IWebDriver driver) : base(driver)
+        {
+
+        }
 
         #region Locators
         private readonly By LengthExp = By.CssSelector("[class='typeConv length bluebg']");
@@ -20,31 +25,31 @@ namespace AttentyPracticeFrameWork.Converters
         // Celsius to Fahrenheit pipe       
         public IMetersToFeet ClickOnLengthConvector()
         {
-            driver.GetElement(LengthExp).Click();
+            Driver.GetElement(LengthExp).Click();
             return this;
         }
 
         public IMetersToFeet ClickOnMeters()
         {
-            driver.GetElement(MetersExp).Click();
+            Driver.GetElement(MetersExp).Click();
             return this;
         }
 
         public IMetersToFeet ClickOnMetersToFeet()
         {
-            driver.GetElement(MetersToFeetExp).Click();
+            Driver.GetElement(MetersToFeetExp).Click();
             return this;
         }
 
         public IMetersToFeet TypeToMetersTextBox(decimal num)
         {
-            driver.GetElement(ArgumentConvExp).SendKeys(num.ToString());
+            Driver.GetElement(ArgumentConvExp).SendKeys(num.ToString());
             return this;
         }
 
         public IMetersToFeet ChangeFormatToDecimal()
         {
-            var element = driver.GetElement(FormatExp);
+            var element = Driver.GetElement(FormatExp);
             element.SendKeys("Decimal" + Keys.Enter);
 
             return this;
@@ -52,7 +57,7 @@ namespace AttentyPracticeFrameWork.Converters
 
         public string GetConvertionValue()
         {
-            return driver.GetElement(ResultExp).Text;
+            return Driver.GetElement(ResultExp).Text;
         }      
     }
 }

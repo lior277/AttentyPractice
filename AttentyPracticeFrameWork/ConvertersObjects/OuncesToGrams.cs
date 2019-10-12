@@ -1,14 +1,18 @@
 ﻿using AttentyPractice.Internals;
-using AttentyPractice.Internals.WebDriverImplemention;
 using AttentyPracticeFrameWork.WebDriverActions;
 using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public class OuncesToGrams : ApiFactory, IOuncesToGrams
+    public class OuncesToGrams : ApplicationFactory, IOuncesToGrams
     {
-        public IWebDriver driver { get; set; }
-    
+        public IWebDriver Driver { get; set; }
+
+        public OuncesToGrams(IWebDriver driver) : base(driver)
+        {
+
+        }
+
         #region Locators
         private readonly By WeightExp = By.CssSelector("[class='typeConv weight bluebg']");
         private readonly By OuncesExp = By.XPath("//a[contains(.,'Ounces')]");
@@ -19,43 +23,43 @@ namespace AttentyPracticeFrameWork.Converters
 
         public IOuncesToGrams ClickOnOunces()
         {
-            driver.GetElement(OuncesExp).Click();
+            Driver.GetElement(OuncesExp).Click();
             return this;
         }
 
         public IOuncesToGrams ClickOnOuncesToGrams()
         {
-            driver.GetElement(OuncesToGramsExp).Click();
+            Driver.GetElement(OuncesToGramsExp).Click();
             return this;
         }
 
         public IOuncesToGrams ClickOnWeightConvector()
         {
-            driver.GetElement(WeightExp).Click();
+            Driver.GetElement(WeightExp).Click();
             return this;
         }
 
         public string GetConvertionValue()
         {
-            return driver.GetElement(ResultExp).Text;
+            return Driver.GetElement(ResultExp).Text;
         }
 
         public IOuncesToGrams InitiateWebDriver(IWebDriver driver)
         {
-            this.driver = driver;
+            this.Driver = driver;
             driver.Manage().Window.Maximize();
             return this;
         }
 
         public IOuncesToGrams NvigateToConvectorSite(string url)
         {
-            driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(url);
             return this;
         }
 
         public IOuncesToGrams TypeToOuncesTextBox(decimal num)
         {
-            driver.GetElement(ArgumentConvExp).SendKeys(num.ToString());
+            Driver.GetElement(ArgumentConvExp).SendKeys(num.ToString());
             return this;
         }  
     }

@@ -91,10 +91,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Internals\ApiFactory.cs" />
-    <Compile Include="Internals\IApiFactory.cs" />
+    <Compile Include="Internals\ApplicationFactory.cs" />
+    <Compile Include="Internals\DAL\ApiAccsess\ApiAccess.cs" />
+    <Compile Include="Internals\DAL\ApiAccsess\ApiRoutes\IApiRouteAggregate.cs" />
+    <Compile Include="Internals\DAL\ApiAccsess\IApiAccess.cs" />
+    <Compile Include="Internals\IApplicationFactory.cs" />
     <Compile Include="Internals\TestsInternas\TestSuitBase.cs" />
-    <Compile Include="Weather\ApiRouteAggregate\ApiRouteAggregate.cs" />
+    <Compile Include="Internals\DAL\ApiAccsess\ApiRoutes\ApiRouteAggregate.cs" />
     <Compile Include="Internals\ContainerInitialized\ContainerInitialized.cs" />
     <Compile Include="ConvertersObjects\ConversionRaitas\ConversionRaitasCalcluation.cs" />
     <Compile Include="ConvertersObjects\IMetersToFeet.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internals\Extensions\WebDriverExtension.cs" />
     <Compile Include="Weather\IWeatherApi.cs" />
+    <Compile Include="Weather\ITemperature.cs" />
     <Compile Include="Weather\WeatherApi.cs" />
     <Compile Include="Weather\IWeatherUi.cs" />
     <Compile Include="Weather\WeatherUi.cs" />

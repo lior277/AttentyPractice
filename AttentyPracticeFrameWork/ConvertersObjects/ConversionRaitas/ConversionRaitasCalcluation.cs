@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AttentyPracticeFrameWork.ConversionRaitesexpected
 {
-   public static class ConversionRaitasCalcluation
+    public static class ConversionRaitasCalcluation
     {
         private const decimal MetersToFeetRate = 3.28084m;
         private const decimal OunceToGramRate = 28.35m;

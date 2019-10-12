@@ -2,7 +2,7 @@
 
 namespace AttentyPracticeFrameWork.Converters
 {
-    public interface ICelsiusToFahrenheit : IApiFactory
+    public interface ICelsiusToFahrenheit : IApplicationFactory
     {
         ICelsiusToFahrenheit ClickOnTemperatureConvector();
         ICelsiusToFahrenheit ClickOnCelsius();

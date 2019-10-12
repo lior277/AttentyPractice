@@ -1,7 +1,6 @@
-﻿using AttentyPracticeFrameWork.Extension;
+﻿using AttentyPractice.Internals;
 using AttentyPracticeFrameWork.Weather;
 using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
 using System;
 
 namespace Tests.Tests
@@ -9,33 +8,28 @@ namespace Tests.Tests
     [TestFixture]
     public class WeatherCom : TestSuitBase
     {
-        private IWeatherUi weatherUi;
-        private IWeatherApi WeatherApi;
         private string location = "20852";
     
         [Test]
         public void GetTemperature()
         {
-            var driver = new ChromeDriver();
+            var driver = GetDriver(Drivertype.Chrome);
 
-            var temperatureUI = weatherUi
-                .InitiateWebDriver(driver)
-                .NavigateToTemperatureSite(weatherSiteUrl)
+            var temperatureUi = new ApplicationFactory(driver)
+                .ChangeContext<IWeatherUi>(weatherSiteUrl)
                 .SearchLocation(location)
                 .ChooseLocation()
-                .GetTemperatureValue();
-            var actual = temperatureUI.GetTeperature();
+                .GetTodayTemperatureValue();
 
-            var responce = WeatherApi.GetWeather();
-            var temperature = responce.Vt1Observation.Temperature;
-            Assert.IsTrue(Math.Abs(actual - temperature) <= 0.1);
+            var responce = new ApplicationFactory()
+                .ChangeContext<IWeatherApi>()
+                .GetTodayTemperatureValue();
+
+            var temperatureApi = responce.Vt1Observation.Temperature;
+            Assert.IsTrue(Math.Abs(temperatureUi - temperatureApi) <= 0.1);
+
+            driver.Quit();
+            driver = null;
         }
-
-        [TearDown]
-        public void TestCleanupAttribute()
-        {
-            //Dispose();
-        }
-
     }
 }

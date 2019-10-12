@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using System.Net.Http;
 
 namespace Tests
 {
@@ -9,6 +10,7 @@ namespace Tests
         public string convectorSiteUrl = "https://www.metric-conversions.org/";
         public string weatherSiteUrl = "https://weather.com/";
 
+        public HttpClient HttpClient;
         public enum Drivertype { Chrome, FireFox };
         public IWebDriver GetDriver(Drivertype drivertype)
         {
@@ -19,6 +21,7 @@ namespace Tests
 
                 case Drivertype.FireFox:
                     return new FirefoxDriver();
+                    
                 default:
                     return new ChromeDriver();
             }

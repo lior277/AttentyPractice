@@ -25,7 +25,7 @@ namespace AttentyPracticeFrameWork.Extension
             return Decimal.Round(Convert.ToDecimal(match[0].Value), 3);
         }
 
-        public static int GetTeperature(this string result)
+        public static int GetTemperature(this string result)
         {
             string pattern = @"(\d+)";
             Regex regex = new Regex(pattern);

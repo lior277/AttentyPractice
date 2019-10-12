@@ -1,48 +1,28 @@
-﻿using AttentyPracticeFrameWork.ApiRouteAggregate;
+﻿using AttentyPractice.Internals;
+using AttentyPractice.Internals.DAL;
+using AttentyPracticeFrameWork.ApiRoutes;
 using AttentyPracticeFrameWork.Dto_s;
-using AttentyPracticeFrameWork.Weather;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AttentyPracticeFrameWork.Weather
 {
-    public class WeatherApi : IWeatherApi
+    public class WeatherApi : ApplicationFactory, IWeatherApi
     {
-        public IWebDriver driver { get; set; }
-        static HttpClient client = new HttpClient();
+        HttpClient _client;
+        IApiAccess _apiAccess;
+        IApiRouteAggregate _apiRouteAggregate;
 
-        public WeatherApi()
+        public WeatherApi(HttpClient client, IApiAccess apiAccess, IApiRouteAggregate apiRouteAggregate)
         {
-            var baseApiUrl = @"https://api.weather.com";
-
-            client.BaseAddress = new Uri(baseApiUrl);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            _client = client;
+            _apiAccess = apiAccess;
+            _apiRouteAggregate = apiRouteAggregate;
         }
-
-        public GetWeatherResponse GetWeather()
+    
+        public GetWeatherResponse GetTodayTemperatureValue()
         {
-
-            var route = ApiRouteAggregate.ApiRouteAggregate.GetWeatherEntry();
-            return ExecuteGetEntry<GetWeatherResponse>(route);
-        }
-
-        private TResponseDto ExecuteGetEntry<TResponseDto>(string apiRoute)
-        {
-            var response = client.GetAsync(apiRoute);
-            var json = response.Result.Content.ReadAsStringAsync().Result;
-
-            var Obj = JsonConvert.DeserializeObject<TResponseDto>(json);
-
-            return Obj;
+            var route = _apiRouteAggregate.GetWeatherEntry();
+            return _apiAccess.ExecuteGetEntry<GetWeatherResponse>(route);
         }
     }
 }

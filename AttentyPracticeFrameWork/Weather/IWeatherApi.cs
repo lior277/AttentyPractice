@@ -1,9 +1,9 @@
-﻿using AttentyPracticeFrameWork.Dto_s;
+﻿using AttentyPractice.Internals;
+using AttentyPracticeFrameWork.Dto_s;
 
 namespace AttentyPracticeFrameWork.Weather
 {
-    public interface IWeatherApi
+    public interface IWeatherApi : IApplicationFactory, ITemperature<GetWeatherResponse>
     {
-        GetWeatherResponse GetWeather();
     }
 }
