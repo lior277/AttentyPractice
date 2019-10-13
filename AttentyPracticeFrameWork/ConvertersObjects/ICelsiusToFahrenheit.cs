@@ -9,6 +9,6 @@ namespace AttentyPracticeFrameWork.Converters
         ICelsiusToFahrenheit ClickOnCelsiusToFahrenheit();
         ICelsiusToFahrenheit TypeToCelsiusTextBox(decimal num);
         ICelsiusToFahrenheit ChangeFormatToDecimal();
-        string GetConvertionValue();
+        decimal GetConvertionValue();
     }
 }

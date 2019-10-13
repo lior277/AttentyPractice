@@ -11,6 +11,6 @@ namespace AttentyPracticeFrameWork.Converters
         IOuncesToGrams ClickOnOunces();
         IOuncesToGrams ClickOnOuncesToGrams();
         IOuncesToGrams TypeToOuncesTextBox(decimal num);
-        string GetConvertionValue();
+        decimal GetConvertionValue();
     }
 }

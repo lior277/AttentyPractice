@@ -1,5 +1,6 @@
 ﻿using AttentyPractice.Internals;
 using AttentyPracticeFrameWork.WebDriverActions;
+using static AttentyPracticeFrameWork.Extension.StringExtension;
 using OpenQA.Selenium;
 
 namespace AttentyPracticeFrameWork.Converters
@@ -39,9 +40,10 @@ namespace AttentyPracticeFrameWork.Converters
             return this;
         }
 
-        public string GetConvertionValue()
+        public decimal GetConvertionValue()
         {
-            return Driver.GetElement(ResultExp).Text;
+            var result = Driver.GetElement(ResultExp).Text;
+            return result.GetNumberFromResault();
         }
 
         public IOuncesToGrams InitiateWebDriver(IWebDriver driver)

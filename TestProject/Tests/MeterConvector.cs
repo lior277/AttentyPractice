@@ -1,5 +1,4 @@
 using AttentyPracticeFrameWork.Converters;
-using static AttentyPracticeFrameWork.Extension.StringExtension;
 using AttentyPracticeFrameWork.ConversionRaitesexpected;
 using System;
 using AttentyPractice.Internals;
@@ -16,9 +15,9 @@ namespace Tests
         [Test]
         public void MeterToFeet()
         {
-            var driver = new ChromeDriver();
+            var driver = GetDriver(Drivertype.Chrome);
 
-            var result = new ApplicationFactory(driver)
+            var resultFromUi = new ApplicationFactory(driver)
                  .ChangeContext<IMetersToFeet>()
                  .ClickOnLengthConvector()
                  .ClickOnMeters()
@@ -27,10 +26,14 @@ namespace Tests
                  .ChangeFormatToDecimal()
                  .GetConvertionValue();
 
-            var actual = result.GetResaultNum();
-            var num = ConversionRaitasCalcluation.MetersToFeet(numberToConvert);
-            var expected = Math.Abs(actual - num);
+            // calcluationn with formula
+            var resultFromCalcuation = ConversionRaitasCalcluation.MetersToFeet(numberToConvert);
+            var expected = Math.Abs(resultFromUi - resultFromCalcuation);
+
             Assert.IsTrue(expected < 1);
+
+            driver.Quit();
+            driver = null;
         }
 
         [TearDown]

@@ -6,7 +6,7 @@ namespace AttentyPracticeFrameWork.Extension
     public static class StringExtension
     {
 
-        public static decimal GetResaultNum(this string result)
+        public static decimal GetNumberFromResault(this string result)
         {
             string pattern;
             var values = result.Split('=');

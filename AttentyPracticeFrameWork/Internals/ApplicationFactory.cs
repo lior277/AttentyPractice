@@ -23,7 +23,7 @@ namespace AttentyPractice.Internals
         {
             var app = ConfigurationManager.AppSettings["converterApplicationPath"].ToLower();
             _application = application ?? app;
-            _driver.Navigate().GoToUrl(application);
+            _driver.Navigate().GoToUrl(_application);
             _driver.Manage().Window.Maximize();
         }
                 

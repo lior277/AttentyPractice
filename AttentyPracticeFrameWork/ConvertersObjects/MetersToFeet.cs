@@ -1,4 +1,5 @@
 ﻿using AttentyPractice.Internals;
+using static AttentyPracticeFrameWork.Extension.StringExtension;
 using AttentyPracticeFrameWork.WebDriverActions;
 using OpenQA.Selenium;
 
@@ -7,11 +8,6 @@ namespace AttentyPracticeFrameWork.Converters
     public class MetersToFeet : ApplicationFactory, IMetersToFeet
     {
         public IWebDriver Driver { get; set; }
-
-        public MetersToFeet(IWebDriver driver) : base(driver)
-        {
-
-        }
 
         #region Locators
         private readonly By LengthExp = By.CssSelector("[class='typeConv length bluebg']");
@@ -55,9 +51,10 @@ namespace AttentyPracticeFrameWork.Converters
             return this;
         }
 
-        public string GetConvertionValue()
-        {
-            return Driver.GetElement(ResultExp).Text;
+        public decimal GetConvertionValue()
+        {          
+            var result = Driver.GetElement(ResultExp).Text;
+            return result.GetNumberFromResault();
         }      
     }
 }

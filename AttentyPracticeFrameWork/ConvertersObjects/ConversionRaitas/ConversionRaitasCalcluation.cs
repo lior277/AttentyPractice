@@ -20,6 +20,6 @@ namespace AttentyPracticeFrameWork.ConversionRaitesexpected
         public static decimal CelsiusToFahrenheit(decimal value)
         {
             return (value * 9 / 5) + 32;
-        }      
+        }
     }
 }

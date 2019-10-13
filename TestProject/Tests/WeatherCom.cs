@@ -11,7 +11,7 @@ namespace Tests.Tests
         private string location = "20852";
     
         [Test]
-        public void GetTemperature()
+        public void GetTodayTemperature()
         {
             var driver = GetDriver(Drivertype.Chrome);
 

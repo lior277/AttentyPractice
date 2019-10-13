@@ -18,7 +18,7 @@ namespace Tests
         {
            var driver = GetDriver(Drivertype.Chrome);
 
-            var result = new ApplicationFactory()
+            var resultFromUi = new ApplicationFactory(driver)
                 .ChangeContext<ICelsiusToFahrenheit>()
                 .ClickOnTemperatureConvector()
                 .ClickOnCelsius()
@@ -27,9 +27,8 @@ namespace Tests
                 .ChangeFormatToDecimal()
                 .GetConvertionValue();
 
-            var actual = result.GetResaultNum();
-            var num = ConversionRaitasCalcluation.CelsiusToFahrenheit(numberToConvert);
-            var expected = Math.Abs(actual - num);
+            var resultFromCalcuation = ConversionRaitasCalcluation.CelsiusToFahrenheit(numberToConvert);
+            var expected = Math.Abs(resultFromUi - resultFromCalcuation);
             Assert.IsTrue(expected < 1);
 
             driver.Quit();

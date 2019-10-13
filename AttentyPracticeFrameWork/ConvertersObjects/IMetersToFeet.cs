@@ -9,6 +9,6 @@ namespace AttentyPracticeFrameWork.Converters
         IMetersToFeet ClickOnMetersToFeet();
         IMetersToFeet TypeToMetersTextBox(decimal num);
         IMetersToFeet ChangeFormatToDecimal();
-        string GetConvertionValue();
+        decimal GetConvertionValue();
     }
 }
