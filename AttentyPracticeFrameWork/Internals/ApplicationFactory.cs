@@ -9,7 +9,6 @@ namespace AttentyPractice.Internals
     public class ApplicationFactory : IApplicationFactory
     {
         protected IWebDriver _driver;
-        protected HttpClient _client;
         private string _application;
 
         public ApplicationFactory(IWebDriver driver)
@@ -17,7 +16,7 @@ namespace AttentyPractice.Internals
            _driver = driver;         
         }
      
-        public ApplicationFactory(){ }
+        public ApplicationFactory() { }
 
         public void OpenApplication(string application = null)
         {

@@ -1,7 +1,9 @@
-﻿namespace AttentyPractice.Internals.DAL
+﻿using System.Threading.Tasks;
+
+namespace AttentyPractice.Internals.DAL
 {
     public interface IApiAccess
     {
-        TResponseDto ExecuteGetEntry<TResponseDto>(string apiRoute);
+        Task<TResponseDto> ExecuteGetEntry<TResponseDto>(string apiRoute);
     }
 }

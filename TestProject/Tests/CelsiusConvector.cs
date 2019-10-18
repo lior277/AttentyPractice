@@ -16,8 +16,6 @@ namespace Tests
         [Test]
         public void CelsiusToFahrenheit()
         {
-           var driver = GetDriver(Drivertype.Chrome);
-
             var resultFromUi = new ApplicationFactory(driver)
                 .ChangeContext<ICelsiusToFahrenheit>()
                 .ClickOnTemperatureConvector()

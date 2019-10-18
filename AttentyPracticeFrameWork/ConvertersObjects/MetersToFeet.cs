@@ -10,7 +10,7 @@ namespace AttentyPracticeFrameWork.Converters
         public IWebDriver Driver { get; set; }
 
         #region Locators
-        private readonly By LengthExp = By.CssSelector("[class='typeConv length bluebg']");
+        private readonly By LengthExp = By.CssSelector("[class='typeConv length bluebg']//");
         private readonly By MetersExp = By.XPath("//a[contains(.,'Meters')]");
         private readonly By MetersToFeetExp = By.XPath("//a[contains(.,'Meters to Feet')]");
         private readonly By FormatExp = By.XPath("//select[@id='format']");

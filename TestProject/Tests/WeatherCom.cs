@@ -13,7 +13,9 @@ namespace Tests.Tests
         [Test]
         public void GetTodayTemperature()
         {
-            var driver = GetDriver(Drivertype.Chrome);
+            var responce = new ApplicationFactory()
+               .ChangeContext<IWeatherApi>()
+               .GetTodayTemperatureValue();
 
             var temperatureUi = new ApplicationFactory(driver)
                 .ChangeContext<IWeatherUi>(weatherSiteUrl)
@@ -21,9 +23,9 @@ namespace Tests.Tests
                 .ChooseLocation()
                 .GetTodayTemperatureValue();
 
-            var responce = new ApplicationFactory()
-                .ChangeContext<IWeatherApi>()
-                .GetTodayTemperatureValue();
+            //var responce = new ApplicationFactory()
+            //    .ChangeContext<IWeatherApi>()
+            //    .GetTodayTemperatureValue();
 
             var temperatureApi = responce.Vt1Observation.Temperature;
             Assert.IsTrue(Math.Abs(temperatureUi - temperatureApi) <= 0.1);

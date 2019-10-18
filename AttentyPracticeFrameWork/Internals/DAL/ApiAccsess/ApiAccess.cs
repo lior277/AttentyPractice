@@ -2,6 +2,7 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace AttentyPractice.Internals.DAL
 {
@@ -19,13 +20,11 @@ namespace AttentyPractice.Internals.DAL
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public TResponseDto ExecuteGetEntry<TResponseDto>(string apiRoute)
+        public async Task<TResponseDto> ExecuteGetEntry<TResponseDto>(string apiRoute)
         {
             var response = _client.GetAsync(apiRoute);
             var json = response.Result.Content.ReadAsStringAsync().Result;
-            var Obj = JsonConvert.DeserializeObject<TResponseDto>(json);
-
-            return Obj;
+            return JsonConvert.DeserializeObject<TResponseDto>(json);
         }
     }
 }

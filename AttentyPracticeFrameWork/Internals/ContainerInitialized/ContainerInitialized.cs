@@ -3,6 +3,8 @@ using AttentyPracticeFrameWork.ApiRoutes;
 using AttentyPracticeFrameWork.Converters;
 using AttentyPracticeFrameWork.Weather;
 using Autofac;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
 using System.Net.Http;
 
@@ -21,8 +23,10 @@ namespace AttentyPracticeFrameWork.ContainerInitiate
             builder.RegisterType<ApiAccess>().As<IApiAccess>();
             builder.RegisterType<ApiRouteAggregate>().As<IApiRouteAggregate>();
             builder.RegisterType<CelsiusToFahrenheit>().OnActivating(e => e.Instance.Driver = driver).As<ICelsiusToFahrenheit>();
-            builder.RegisterType<HttpClient>().AsSelf().InstancePerLifetimeScope();
-
+            builder.RegisterType<HttpClient>().AsSelf().SingleInstance();
+            builder.RegisterType<ExtentReports>().AsSelf();
+            builder.RegisterType<ExtentHtmlReporter>().AsSelf();
+            
             var container = builder.Build();
 
             return container;

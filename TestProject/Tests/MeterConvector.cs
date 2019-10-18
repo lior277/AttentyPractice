@@ -3,7 +3,6 @@ using AttentyPracticeFrameWork.ConversionRaitesexpected;
 using System;
 using AttentyPractice.Internals;
 using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
 
 namespace Tests
 {
@@ -15,8 +14,6 @@ namespace Tests
         [Test]
         public void MeterToFeet()
         {
-            var driver = GetDriver(Drivertype.Chrome);
-
             var resultFromUi = new ApplicationFactory(driver)
                  .ChangeContext<IMetersToFeet>()
                  .ClickOnLengthConvector()
@@ -28,19 +25,9 @@ namespace Tests
 
             // calcluationn with formula
             var resultFromCalcuation = ConversionRaitasCalcluation.MetersToFeet(numberToConvert);
-            var expected = Math.Abs(resultFromUi - resultFromCalcuation);
+            var expected = Math.Abs(resultFromUi - resultFromCalcuation) < 1;
 
-            Assert.IsTrue(expected < 1);
-
-            driver.Quit();
-            driver = null;
-        }
-
-        [TearDown]
-        public void TestCleanupAttribute()
-        {
-            //Dispose();
-        }
-
+            Assert.IsTrue(expected);
+        }     
     }
 }

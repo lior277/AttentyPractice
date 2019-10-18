@@ -15,8 +15,6 @@ namespace Tests
         [Test]
         public void OuncesToGrams()
         {
-            var driver = GetDriver(Drivertype.Chrome);
-
             var resultFromUi = new ApplicationFactory(driver)
                  .ChangeContext<IOuncesToGrams>()
                  .ClickOnWeightConvector()
