@@ -94,6 +94,7 @@ namespace AttentyPracticeFrameWork.WebDriverActions
                 catch (Exception)
                 {
                     return false;
+
                 }
             });
         }           
