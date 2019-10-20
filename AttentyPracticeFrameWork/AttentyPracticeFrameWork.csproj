@@ -177,9 +177,6 @@
     <Analyzer Include="..\packages\Roslyn.Diagnostics.Analyzers.2.9.6\analyzers\dotnet\cs\Roslyn.Diagnostics.CSharp.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.BannedApiAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.BannedApiAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.BannedApiAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.BannedApiAnalyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.PublicApiAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.PublicApiAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.PublicApiAnalyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Roslyn.Diagnostics.Analyzers.2.9.6\build\Roslyn.Diagnostics.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Roslyn.Diagnostics.Analyzers.2.9.6\build\Roslyn.Diagnostics.Analyzers.props'))" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">   
   </Target>
 </Project>
