@@ -103,7 +103,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReportDAL\ExtentReport.cs" />
     <Compile Include="Tests\CelsiusConvector.cs" />
     <Compile Include="Tests\MeterConvector.cs" />
     <Compile Include="Tests\WeatherCom.cs" />
