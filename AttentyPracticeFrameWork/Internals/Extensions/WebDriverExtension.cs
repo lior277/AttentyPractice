@@ -23,7 +23,7 @@ namespace AttentyPracticeFrameWork.WebDriverActions
                     for (int i = 0; i < fromSeconds; i++)
                     {
                         var elementToBeDisplayed = driver.FindElement(by);
-                        for (int j = 0; i < 4; i++)
+                        for (int j = 0; j < 4; i++)
                         {
                             elementToBeDisplayed.ForceClick(driver);
                         }
@@ -91,7 +91,7 @@ namespace AttentyPracticeFrameWork.WebDriverActions
                     jse.ExecuteScript("scroll(250, 0)");
                     return true;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return false;
                 }

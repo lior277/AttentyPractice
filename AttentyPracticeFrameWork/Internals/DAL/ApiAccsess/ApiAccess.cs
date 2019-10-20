@@ -23,7 +23,7 @@ namespace AttentyPractice.Internals.DAL
         public async Task<TResponseDto> ExecuteGetEntry<TResponseDto>(string apiRoute)
         {
             var response = _client.GetAsync(apiRoute);
-            var json = response.Result.Content.ReadAsStringAsync().Result;
+            var json = await response.Result.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<TResponseDto>(json);
         }
     }
