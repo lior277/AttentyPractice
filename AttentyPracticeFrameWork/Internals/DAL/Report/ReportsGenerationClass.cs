@@ -12,28 +12,32 @@ namespace ReportDAL
 {  
     public class ReportsGenerationClass
     {
-        private static string reportPath;      
-        protected ExtentReports _extent;
+        private static string reportPath;
+        static ExtentReports _extent;
         protected ExtentTest _test;
         protected DateTime time = DateTime.Now;
         protected static string screenShotName;
         Status logstatus;
-        protected ExtentHtmlReporter _htmlReporter;
+        static ExtentHtmlReporter _htmlReporter;
 
-        public void ReportSetUp()
+        public static ExtentReports ReportSetUp()
         {
-            var path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
-            var actualPath = path.Substring(0, path.LastIndexOf("bin"));
-            var projectPath = new Uri(actualPath).LocalPath;
-            string Todaysdate = DateTime.Now.ToString("-dd-MM-yyyy-(hh-mm-ss)");
-            reportPath = Path.Combine(projectPath + "Reports", $"Report{Todaysdate}", "Screenshots");
-            Directory.CreateDirectory(reportPath);
-            _htmlReporter = new ExtentHtmlReporter(reportPath);
-            _extent = new ExtentReports();
-            _extent.AttachReporter(_htmlReporter);
-            _extent.AddSystemInfo("Host Name", "LocalHost");
-            _extent.AddSystemInfo("Environment", "QA");
-            _extent.AddSystemInfo("UserName", "TestUser");
+            if (_extent == null)
+            {
+                var path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
+                var actualPath = path.Substring(0, path.LastIndexOf("bin"));
+                var projectPath = new Uri(actualPath).LocalPath;
+                string Todaysdate = DateTime.Now.ToString("-dd-MM-yyyy-(hh-mm-ss)");
+                reportPath = Path.Combine(projectPath + "Reports", $"Report{Todaysdate}", "Screenshots");
+                Directory.CreateDirectory(reportPath);
+                _htmlReporter = new ExtentHtmlReporter(reportPath);
+                _extent = new ExtentReports();
+                _extent.AttachReporter(_htmlReporter);
+                _extent.AddSystemInfo("Host Name", "LocalHost");
+                _extent.AddSystemInfo("Environment", "QA");
+                _extent.AddSystemInfo("UserName", "TestUser");
+            }
+            return _extent;
         }
           
         public void BeforeTest()
@@ -49,11 +53,10 @@ namespace ReportDAL
         {
             var status = TestContext.CurrentContext.Result.Outcome.Status;
             var testName = TestContext.CurrentContext.Test.Name;
-            var stacktrace = TestContext.CurrentContext.Result.StackTrace
-            ?? string.Format("{ 0}", TestContext.CurrentContext.Result.StackTrace);
-
-
-
+            var testMessage = TestContext.CurrentContext.Result.Message;
+            var testAsserts = TestContext.CurrentContext.Result.Assertions;
+            var stackTrace = "<pre>" + TestContext.CurrentContext.Result.StackTrace + "</pre>";
+            
             switch (status)
             {
                 case TestStatus.Failed:
@@ -69,7 +72,7 @@ namespace ReportDAL
                     logstatus = Status.Pass;
                     break;
             }
-            _test.Log(logstatus, "Test ended with " + logstatus + stacktrace);
+            _test.Log(logstatus, $" Test ended with {logstatus} {stackTrace} {testMessage} {testAsserts}");
             _extent.Flush();
         }
 
@@ -84,7 +87,7 @@ namespace ReportDAL
         private void FailCase(IWebDriver driver, string testName)
         {
             logstatus = Status.Fail;
-            DateTime time = DateTime.Now;
+
             screenShotName = "Screenshot_" + time.ToString("-dd-MM-yyyy-(hh-mm-ss)") + ".png";
             String screenShotPath = Capture(driver, screenShotName);
             _test.Log(Status.Fail, "Fail");

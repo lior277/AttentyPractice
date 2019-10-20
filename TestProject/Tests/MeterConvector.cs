@@ -14,7 +14,7 @@ namespace Tests
         [Test]
         public void MeterToFeet()
         {
-            var resultFromUi = new ApplicationFactory(driver)
+            var resultFromUi = apiFactory
                  .ChangeContext<IMetersToFeet>()
                  .ClickOnLengthConvector()
                  .ClickOnMeters()
@@ -27,7 +27,7 @@ namespace Tests
             var resultFromCalcuation = ConversionRaitasCalcluation.MetersToFeet(numberToConvert);
             var expected = Math.Abs(resultFromUi - resultFromCalcuation) < 1;
 
-            Assert.IsTrue(expected);
+            Assert.IsTrue(false);
         }     
     }
 }

@@ -1,4 +1,5 @@
-﻿using AventStack.ExtentReports;
+﻿using AttentyPractice.Internals;
+using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -10,21 +11,22 @@ using System;
 using System.IO;
 using System.Net.Http;
 
+
 namespace Tests
 {
      public class TestSuitBase : ReportsGenerationClass
     {
+        public static ApplicationFactory apiFactory;
         public IWebDriver driver;
         public string convectorSiteUrl = "https://www.metric-conversions.org/";
         public string weatherSiteUrl = "https://weather.com/";       
 
-        public HttpClient HttpClient;
         public TestSuitBase()
         {
-
+            GetApplication();
             driver = GetDriver("Chrome");
         }
-        
+                
         public IWebDriver GetDriver(string driverType)
         {
             switch (driverType)
@@ -37,16 +39,15 @@ namespace Tests
             }
         }
 
+        public ApplicationFactory GetApplication()
+        {
+            return apiFactory = apiFactory ?? new ApplicationFactory();
+        }
+
         [OneTimeSetUp]
         protected void Setup()
         {
             ReportSetUp();
-        }
-
-        [OneTimeTearDown]
-        protected void OneTimeTearDown()
-        {
-            _extent.Flush();
         }
 
         [SetUp]
@@ -54,6 +55,12 @@ namespace Tests
         {
             BeforeTest();
         }
+
+        [OneTimeTearDown]
+        protected void OneTimeTearDown()
+        {
+            ExtendTearDoun();
+        }      
 
         [TearDown]
         public void TearDown()

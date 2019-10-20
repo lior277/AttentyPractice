@@ -5,6 +5,6 @@ namespace AttentyPractice.Internals
 {
     public interface IApplicationFactory
     {
-        T ChangeContext<T>(string application) where T : class;
+        T ChangeContext<T>(IWebDriver driver, string application) where T : class;
     }
 }

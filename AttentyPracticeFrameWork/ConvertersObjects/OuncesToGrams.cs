@@ -8,12 +8,7 @@ namespace AttentyPracticeFrameWork.Converters
     public class OuncesToGrams : ApplicationFactory, IOuncesToGrams
     {
         public IWebDriver Driver { get; set; }
-
-        public OuncesToGrams(IWebDriver driver) : base(driver)
-        {
-
-        }
-
+     
         #region Locators
         private readonly By WeightExp = By.CssSelector("[class='typeConv weight bluebg']");
         private readonly By OuncesExp = By.XPath("//a[contains(.,'Ounces')]");

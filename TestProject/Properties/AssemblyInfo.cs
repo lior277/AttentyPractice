@@ -20,3 +20,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly : Parallelizable(ParallelScope.Children)]
 [assembly : LevelOfParallelism(2)]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]

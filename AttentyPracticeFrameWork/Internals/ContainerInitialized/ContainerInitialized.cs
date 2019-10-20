@@ -6,6 +6,7 @@ using Autofac;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
+using ReportDAL;
 using System.Net.Http;
 
 namespace AttentyPracticeFrameWork.ContainerInitiate
@@ -24,8 +25,7 @@ namespace AttentyPracticeFrameWork.ContainerInitiate
             builder.RegisterType<ApiRouteAggregate>().As<IApiRouteAggregate>();
             builder.RegisterType<CelsiusToFahrenheit>().OnActivating(e => e.Instance.Driver = driver).As<ICelsiusToFahrenheit>();
             builder.RegisterType<HttpClient>().AsSelf().SingleInstance();
-            builder.RegisterType<ExtentReports>().AsSelf();
-            builder.RegisterType<ExtentHtmlReporter>().AsSelf();
+            builder.RegisterType<ExtentTest>().AsSelf();
             
             var container = builder.Build();
 

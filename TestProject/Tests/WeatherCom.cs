@@ -13,25 +13,18 @@ namespace Tests.Tests
         [Test]
         public void GetTodayTemperature()
         {
-            var responce = new ApplicationFactory()
-               .ChangeContext<IWeatherApi>()
-               .GetTodayTemperatureValue();
-
-            var temperatureUi = new ApplicationFactory(driver)
-                .ChangeContext<IWeatherUi>(weatherSiteUrl)
+            var temperatureUi = apiFactory
+                .ChangeContext<IWeatherUi>(driver, weatherSiteUrl)
                 .SearchLocation(location)
                 .ChooseLocation()
                 .GetTodayTemperatureValue();
 
-            //var responce = new ApplicationFactory()
-            //    .ChangeContext<IWeatherApi>()
-            //    .GetTodayTemperatureValue();
+            var responce = new ApplicationFactory()
+                .ChangeContext<IWeatherApi>()
+                .GetTodayTemperatureValue();
 
             var temperatureApi = responce.Vt1Observation.Temperature;
             Assert.IsTrue(Math.Abs(temperatureUi - temperatureApi) <= 0.1);
-
-            driver.Quit();
-            driver = null;
         }
     }
 }

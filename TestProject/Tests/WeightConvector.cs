@@ -15,7 +15,7 @@ namespace Tests
         [Test]
         public void OuncesToGrams()
         {
-            var resultFromUi = new ApplicationFactory(driver)
+            var resultFromUi = apiFactory
                  .ChangeContext<IOuncesToGrams>()
                  .ClickOnWeightConvector()
                  .ClickOnOunces()

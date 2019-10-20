@@ -9,11 +9,6 @@ namespace AttentyPracticeFrameWork.Converters
     {
         public IWebDriver Driver { get; set; }
 
-        public CelsiusToFahrenheit(IWebDriver driver) : base(driver)
-        {
-
-        }
-
         #region Locators
         private readonly By TemperatureExp = By.CssSelector("[class='typeConv temperature bluebg']");
         private readonly By CelsiusExp = By.XPath("//a[contains(.,'Celsius')]");

@@ -16,7 +16,7 @@ namespace Tests
         [Test]
         public void CelsiusToFahrenheit()
         {
-            var resultFromUi = new ApplicationFactory(driver)
+            var resultFromUi = apiFactory
                 .ChangeContext<ICelsiusToFahrenheit>()
                 .ClickOnTemperatureConvector()
                 .ClickOnCelsius()
