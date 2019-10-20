@@ -103,11 +103,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Report\ReportsGenerationClass.cs" />
+    <Compile Include="TestsInternals\TestSuitBase.cs" />
     <Compile Include="Tests\CelsiusConvector.cs" />
     <Compile Include="Tests\MeterConvector.cs" />
     <Compile Include="Tests\WeatherCom.cs" />
     <Compile Include="Tests\WeightConvector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectCapability Include="TestContainer">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </ProjectCapability>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

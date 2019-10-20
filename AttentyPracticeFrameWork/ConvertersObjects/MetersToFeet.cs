@@ -2,8 +2,6 @@
 using static AttentyPracticeFrameWork.Extension.StringExtension;
 using AttentyPracticeFrameWork.WebDriverActions;
 using OpenQA.Selenium;
-using ReportDAL;
-using AventStack.ExtentReports;
 
 namespace AttentyPracticeFrameWork.Converters
 {

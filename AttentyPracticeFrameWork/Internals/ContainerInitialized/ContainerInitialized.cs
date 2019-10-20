@@ -4,9 +4,7 @@ using AttentyPracticeFrameWork.Converters;
 using AttentyPracticeFrameWork.Weather;
 using Autofac;
 using AventStack.ExtentReports;
-using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
-using ReportDAL;
 using System.Net.Http;
 
 namespace AttentyPracticeFrameWork.ContainerInitiate
